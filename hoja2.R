@@ -65,7 +65,7 @@ nb <- NbClust(scaled_data, diss=NULL, distance = "euclidean",
               index = "all", alphaBeale = 0.1)
 hist(nb$Best.nc[1,], breaks = max(na.omit(nb$Best.nc[1,])))
 
-#Otro m�todo m�s 
+#Otro método más 
 for (i in 1:2) {
   #
   # Estimar cluster optimo - conteo y perform de k means
@@ -102,7 +102,7 @@ clusplot(myData,km$cluster, color=TRUE, shade=TRUE, xlab="Component 1", ylab = "
 #Clustering jerarquico
 hc<-hclust(dist(myData)) #Genera el clustering jerarquico de los datos
 plot(hc) #Genera el dendograma
-rect.hclust(hc,k=2) #Dibuja el corte de los grupos en el gráfico
+rect.hclust(hc,k=2) #Dibuja el corte de los grupos en el grÃ¡fico
 groups<-cutree(hc,k=2) #corta el dendograma, determinando el grupo de cada fila
 myData$gruposHC<-groups
 
@@ -135,3 +135,38 @@ silfcm<-silhouette(fcm$cluster,dist(myData))
 mean(silfcm[,2]) #0.88
 plot(silfcm, col=1:8, border=NA)
 
+#Medias
+with(movies, mean(popularity))
+with(movies, mean(budget))
+with(movies, mean(revenue))
+with(movies, mean(runtime))
+with(movies, mean(vote_count))
+
+#Medianas
+with(movies, median(popularity))
+with(movies, median(budget))
+with(movies, median(revenue))
+with(movies, median(runtime))
+with(movies, median(vote_count))
+
+#Modas
+
+#Funcion para la moda
+getmode <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+modaP <- getmode(movies$popularity)
+print(modaP)
+modaB <- getmode(movies$budget)
+print(modaB)
+modaR <- getmode(movies$revenue)
+print(modaR)
+modaRU <- getmode(movies$runtime)
+print(modaRU)
+modaVC <- getmode(movies$vote_count)
+print(modaVC)
+
+#Tabla de frecuencia release_year
+t = as.data.frame(table(movies$release_year))
